@@ -1202,6 +1202,10 @@ ShinySession <- R6Class(
         )
       )
     },
+    pushState = function(state, title, url) {
+      private$sendMessage(pushState = list(
+        state = state, title = title, url = url))
+    },
     updateQueryString = function(queryString) {
       private$sendMessage(updateQueryString = list(queryString = queryString))
     },
