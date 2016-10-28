@@ -680,9 +680,6 @@ var ShinyApp = function() {
 
   addMessageHandler('pushState', function(message) {
     window.history.pushState(message.state, message.title, message.url);
-    // just to trigger a onpopstate event...
-    window.history.pushState(message.state, message.title, message.url);
-    window.history.back();
   });
 
   addMessageHandler('updateQueryString', function(message) {
