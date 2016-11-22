@@ -7,6 +7,8 @@ shiny 0.14.2.9000
 
 * Added support for injecting JavaScript code when the `shiny.testmode` option is set to `TRUE`. This makes it possible to record test events interactively. ([#1464]https://github.com/rstudio/shiny/pull/1464))
 
+* Added a new `placeholder` argument to `verbatimTextOutput()`. The default is `TRUE`, which means that an empty rectangle will serve as placeholder if the content of a `verbatimTextOutput` is empty (or `NULL`). When `FALSE`, nothing is displayed on the page when the content of the output is empty. ([#1480](https://github.com/rstudio/shiny/pull/1480))
+
 ### Bug fixes
 
 * Fix [#1438](https://github.com/rstudio/shiny/issue/1438): `unbindAll()` should not be called when inserting content with `insertUI()` ([#1449](https://github.com/rstudio/shiny/pull/1449))
