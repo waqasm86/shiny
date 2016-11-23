@@ -555,6 +555,20 @@ runApp <- function(appDir=getwd(),
     handlerManager$clear()
   }, add = TRUE)
 
+  appParts <- as.shiny.appobj(appDir)
+
+  if (missing(port)) {
+    port <- appParts$options$port %OR% port
+  }
+
+  if (missing(launch.browser)) {
+    launch.browser <- appParts$options$launch.browser %OR% launch.browser
+  }
+
+  if (missing(host)) {
+    host <- appParts$options$host %OR% host
+  }
+
   # Enable per-app Shiny options
   oldOptionSet <- .globals$options
   on.exit({
@@ -679,8 +693,6 @@ runApp <- function(appDir=getwd(),
       }
     }
   }
-
-  appParts <- as.shiny.appobj(appDir)
 
   # Extract appOptions (which is a list) and store them as shinyOptions, for
   # this app. (This is the only place we have to store settings that are
