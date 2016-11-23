@@ -20,9 +20,11 @@
 #' @param onStart A function that will be called before the app is actually run.
 #'   This is only needed for \code{shinyAppObj}, since in the \code{shinyAppDir}
 #'   case, a \code{global.R} file can be used for this purpose.
-#' @param options Named options that should be passed to the `runApp` call. You
-#'   can also specify \code{width} and \code{height} parameters which provide a
-#'   hint to the embedding environment about the ideal height/width for the app.
+#' @param options Named options that should be passed to the \code{runApp} call
+#'   (these can be any of the following: "port", "launch.browser", "host", "quiet"
+#'   and "display.mode"). You can also specify \code{width} and \code{height}
+#'   parameters which provide a hint to the embedding environment about the ideal
+#'   height/width for the app.
 #' @param uiPattern A regular expression that will be applied to each \code{GET}
 #'   request to determine whether the \code{ui} should be used to handle the
 #'   request. Note that the entire request path must match the regular

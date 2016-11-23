@@ -569,6 +569,14 @@ runApp <- function(appDir=getwd(),
     host <- appParts$options$host %OR% host
   }
 
+  if (missing(quiet)) {
+    quiet <- appParts$options$quiet %OR% quiet
+  }
+
+  if (missing(display.mode)) {
+    display.mode <- appParts$options$display.mode %OR% display.mode
+  }
+
   # Enable per-app Shiny options
   oldOptionSet <- .globals$options
   on.exit({
