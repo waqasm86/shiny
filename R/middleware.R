@@ -229,7 +229,9 @@ HandlerList <- R6Class("HandlerList",
 
     add = function(handler, key, tail = FALSE) {
       if (!is.null(handlers[[key]]))
-        stop("Key ", key, " already in use")
+        stop("Please remove any calls to `runApp` ",
+             "from inside your source code. (Details: ",
+             "Key ", key, " already in use)")
       newList <- structure(names=key, list(handler))
 
       if (length(handlers) == 0)
