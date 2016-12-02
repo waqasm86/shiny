@@ -568,75 +568,35 @@ runApp <- function(appDir=getwd(),
 
   appParts <- as.shiny.appobj(appDir)
 
-  # Description
+  # The lines below set some of the app's running options, which
+  # can be:
+  #   - left unspeficied (in which case the arguments' default
+  #     values from `runApp` kick in);
+  #   - passed through `shinyApp`
+  #   - passed through `runApp` (this function)
+  #   - passed through both `shinyApp` and `runApp` (the latter
+  #     takes precedence)
+  #
+  # Matrix of possibilities:
+  # | IN shinyApp | IN runApp | result       | check                                                                                                                                  |
+  # |-------------|-----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------|
+  # | no          | no        | use defaults | exhaust all possibilities: if it's missing (runApp does not specify); THEN if it's not in shinyApp appParts$options; THEN use defaults |
+  # | yes         | no        | use shinyApp | if it's missing (runApp does not specify); THEN if it's in shinyApp appParts$options; THEN use shinyApp                                |
+  # | no          | yes       | use runApp   | if it's not missing (runApp specifies), use those                                                                                      |
+  # | yes         | yes       | use runApp   | if it's not missing (runApp specifies), use those                                                                                      |
+  #
+  # I tried to make this as compact and intuitive as possible,
+  # given that there are four distinct possibilities to check
   runOpts <- appParts$options
-  if (missing(port)) port <- runOpts$port %OR% port
-  if (missing(launch.browser)) launch.browser <- runOpts$launch.browser %OR% launch.browser
-  if (missing(host)) host <- runOpts$host %OR% host
-  if (missing(quiet)) quiet <- runOpts$quiet %OR% quiet
-  if (missing(display.mode)) display.mode <- runOpts$display.mode %OR% display.mode
-  if (missing(test.mode)) test.mode <- appParts$options$test.mode %OR% test.mode
 
-  # assignOption <- function(arg) {
-  #   argAsString <- deparse(substitute(arg))
-  #   if (missing(arg)) appParts$options[[argAsString]] %OR% arg
-  # }
-  #
-  # port <- assignOption(port)
-  #
-  # runningArgs <- list("port", "launch.browser", "host", "quiet",
-  #                     "display.mode", "test.mode")
-  #
-  # for (arg in runningArgs) {
-  #   arg <-
-  #   if (missing(arg)) {
-  #     argAsString <- deparse(substitute(arg))
-  #     arg <- appParts$options[[argAsString]] %OR% arg
-  #   }
-  # }
+  if (missing(port)) port <- runOpts$port %OR2% port
+  if (missing(launch.browser)) launch.browser <- runOpts$launch.browser %OR2% launch.browser
+  if (missing(host)) host <- runOpts$host %OR2% host
+  if (missing(quiet)) quiet <- runOpts$quiet %OR2% quiet
+  if (missing(display.mode)) display.mode <- runOpts$display.mode %OR2% display.mode
+  if (missing(test.mode)) test.mode <- appParts$options$test.mode %OR2% test.mode
 
-
-  # lapply(runningArgs, function(x) {
-  #   if (missing(x)) {
-  #     x <- appParts$options$x %OR% x
-  #   }
-  # })
-
-  # for (opt in c(port, launch.browser, host, quiet,
-  #               display.mode, test.mode)) {
-  #
-  #   if (missing(port)) {
-  #     port <- appParts$options$port %OR% port
-  #   }
-  #   assign(opt, assignOption(opt))
-  # }
-
-  # if (missing(port)) {
-  #   port <- appParts$options$port %OR% port
-  # }
-  #
-  # if (missing(launch.browser)) {
-  #   launch.browser <- appParts$options$launch.browser %OR% launch.browser
-  # }
-  #
-  # if (missing(host)) {
-  #   host <- appParts$options$host %OR% host
-  # }
-  #
-  # if (missing(quiet)) {
-  #   quiet <- appParts$options$quiet %OR% quiet
-  # }
-  #
-  # if (missing(display.mode)) {
-  #   display.mode <- appParts$options$display.mode %OR% display.mode
-  # }
-  #
-  # if (missing(test.mode)) {
-  #   test.mode <- appParts$options$test.mode %OR% test.mode
-  # }
-
-  if (is.null(host) || is.na(host))
-    host <- '0.0.0.0'
+  if (is.null(host) || is.na(host)) host <- '0.0.0.0'
 
   workerId(workerId)
 

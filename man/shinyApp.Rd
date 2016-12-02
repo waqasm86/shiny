@@ -45,10 +45,10 @@ This is only needed for \code{shinyAppObj}, since in the \code{shinyAppDir}
 case, a \code{global.R} file can be used for this purpose.}
 
 \item{options}{Named options that should be passed to the \code{runApp} call
-(these can be any of the following: "port", "launch.browser", "host", "quiet"
-and "display.mode"). You can also specify \code{width} and \code{height}
-parameters which provide a hint to the embedding environment about the ideal
-height/width for the app.}
+(these can be any of the following: "port", "launch.browser", "host", "quiet",
+"display.mode" and "test.mode"). You can also specify \code{width} and
+\code{height} parameters which provide a hint to the embedding environment
+about the ideal height/width for the app.}
 
 \item{uiPattern}{A regular expression that will be applied to each \code{GET}
 request to determine whether the \code{ui} should be used to handle the

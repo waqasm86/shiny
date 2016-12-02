@@ -130,6 +130,17 @@ isWholeNum <- function(x, tol = .Machine$double.eps^0.5) {
     x
 }
 
+# use this instead of %OR% when x can be anything other than a
+# list or vector, for which %O%% always generates the warning:
+# "Warning in is.na(x) : is.na() applied to non-(list or vector)
+# of type 'closure'" (or other)
+`%OR2%` <- function(x, y) {
+  if (is.null(x) || suppressWarnings(isTRUE(is.na(x))))
+    y
+  else
+    x
+}
+
 `%AND%` <- function(x, y) {
   if (!is.null(x) && !is.na(x))
     if (!is.null(y) && !is.na(y))
