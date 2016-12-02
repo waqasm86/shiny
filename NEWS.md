@@ -19,6 +19,8 @@ This is a maintenance release of Shiny, with some bug fixes and minor new featur
 
 ### Minor new features and improvements
 
+* Have a more descriptive JS error for `insertUI()` when the selector argument does not match anything in DOM. ([#1488](https://github.com/rstudio/shiny/pull/1488))
+
 * Added a `fade` argument to `modalDialog()` -- setting it to `FALSE` will remove the usual fade-in animation for that modal window. ([#1414](https://github.com/rstudio/shiny/pull/1414))
 
 * Fixed a "duplicate binding" error that occurred in some edge cases involving `insertUI` and nested `uiOutput`. ([#1402](https://github.com/rstudio/shiny/pull/1402))
