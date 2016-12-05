@@ -5,6 +5,8 @@ shiny 0.14.2.9000
 
 ### Minor new features and improvements
 
+* Address [#1486](https://github.com/rstudio/shiny/issue/1486) by adding a new argument to `observeEvent` and `eventReactive`, called `skipFirst` (defaults to `FALSE` for backwards compatibility). When set to `TRUE`, the action will not be triggered the first time (only the subsequent ones) that the observe/reactive is run. ([#1494](https://github.com/rstudio/shiny/pull/1494))
+
 * Added support for injecting JavaScript code when the `shiny.testmode` option is set to `TRUE`. This makes it possible to record test events interactively. ([#1464]https://github.com/rstudio/shiny/pull/1464))
 
 ### Bug fixes
